@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 26, 2017 12:47:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.advertisement.entity.District" table="district" catalog="advertise" optimistic-lock="version">
+        <id name="districtId" type="java.lang.Integer">
+            <column name="district_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="division" class="com.advertisement.entity.Division" fetch="select">
+            <column name="division_id" not-null="true" />
+        </many-to-one>
+        <property name="districtName" type="string">
+            <column name="district_name" length="100" not-null="true" />
+        </property>
+        <set name="areas" table="area" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="district_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.Area" />
+        </set>
+        <set name="carAdvertises" table="car_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="district_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.CarAdvertise" />
+        </set>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="district_id" />
+            </key>
+            <one-to-many class="com.advertisement.entity.User" />
+        </set>
+        <set name="houseAdvertises" table="house_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="district_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.HouseAdvertise" />
+        </set>
+        <set name="otherAdvertises" table="other_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="district_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.OtherAdvertise" />
+        </set>
+    </class>
+</hibernate-mapping>

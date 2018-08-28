@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 26, 2017 12:47:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.advertisement.entity.OtherAdvertise" table="other_advertise" catalog="advertise" optimistic-lock="version">
+        <id name="otherPostId" type="java.lang.Integer">
+            <column name="other_post_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.advertisement.entity.Area" fetch="select">
+            <column name="area_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="district" class="com.advertisement.entity.District" fetch="select">
+            <column name="district_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="division" class="com.advertisement.entity.Division" fetch="select">
+            <column name="division_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.advertisement.entity.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="productName" type="string">
+            <column name="product_name" length="100" not-null="true" />
+        </property>
+        <property name="advertisementTitle" type="string">
+            <column name="advertisement_title" length="450" not-null="true" />
+        </property>
+        <property name="productDescription" type="string">
+            <column name="product_description" length="450" not-null="true" />
+        </property>
+        <property name="productImage" type="binary">
+            <column name="product_image" />
+        </property>
+        <property name="contactNo" type="string">
+            <column name="contact_no" length="45" not-null="true" />
+        </property>
+        <property name="postDate" type="timestamp">
+            <column name="post_date" length="19" not-null="true" />
+        </property>
+        <property name="status" type="char">
+            <column name="status" length="1" not-null="true" />
+        </property>
+        <set name="otherComments" table="other_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="other_post_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.OtherComment" />
+        </set>
+    </class>
+</hibernate-mapping>

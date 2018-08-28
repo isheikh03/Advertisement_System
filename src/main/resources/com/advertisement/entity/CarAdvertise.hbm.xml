@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 26, 2017 12:47:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.advertisement.entity.CarAdvertise" table="car_advertise" catalog="advertise" optimistic-lock="version">
+        <id name="carId" type="java.lang.Integer">
+            <column name="car_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="district" class="com.advertisement.entity.District" fetch="select">
+            <column name="district_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="division" class="com.advertisement.entity.Division" fetch="select">
+            <column name="division_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.advertisement.entity.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="carType" type="string">
+            <column name="car_type" length="100" not-null="true" />
+        </property>
+        <property name="carModel" type="string">
+            <column name="car_model" length="100" />
+        </property>
+        <property name="rentPerDay" type="double">
+            <column name="rent_per_day" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="carImage" type="binary">
+            <column name="car_image" />
+        </property>
+        <property name="advertisementTitle" type="string">
+            <column name="advertisement_title" length="100" />
+        </property>
+        <property name="carDescription" type="string">
+            <column name="car_description" length="350" />
+        </property>
+        <property name="postDate" type="timestamp">
+            <column name="post_date" length="19" not-null="true" />
+        </property>
+        <property name="status" type="char">
+            <column name="status" length="1" not-null="true" />
+        </property>
+        <set name="carComments" table="car_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="car_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.CarComment" />
+        </set>
+    </class>
+</hibernate-mapping>

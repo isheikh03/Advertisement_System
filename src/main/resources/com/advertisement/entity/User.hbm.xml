@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 26, 2017 12:47:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.advertisement.entity.User" table="user" catalog="advertise" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.advertisement.entity.Area" fetch="select">
+            <column name="area_id" />
+        </many-to-one>
+        <many-to-one name="district" class="com.advertisement.entity.District" fetch="select">
+            <column name="district_id" />
+        </many-to-one>
+        <many-to-one name="division" class="com.advertisement.entity.Division" fetch="select">
+            <column name="division_id" />
+        </many-to-one>
+        <property name="userName" type="string">
+            <column name="user_name" length="200" not-null="true" />
+        </property>
+        <property name="userEmail" type="string">
+            <column name="user_email" length="200" not-null="true" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="user_password" length="100" not-null="true" />
+        </property>
+        <property name="userGender" type="string">
+            <column name="user_gender" length="45" />
+        </property>
+        <property name="userBirthdate" type="date">
+            <column name="user_birthdate" length="10" />
+        </property>
+        <property name="userPhoto" type="binary">
+            <column name="user_photo" />
+        </property>
+        <property name="userPhone" type="string">
+            <column name="user_phone" length="45" />
+        </property>
+        <property name="userAddress" type="string">
+            <column name="user_address" length="350" />
+        </property>
+        <set name="carAdvertises" table="car_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.CarAdvertise" />
+        </set>
+        <set name="otherComments" table="other_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.OtherComment" />
+        </set>
+        <set name="otherAdvertises" table="other_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.OtherAdvertise" />
+        </set>
+        <set name="carComments" table="car_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.CarComment" />
+        </set>
+        <set name="houseAdvertises" table="house_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.HouseAdvertise" />
+        </set>
+        <set name="houseComments" table="house_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.HouseComment" />
+        </set>
+    </class>
+</hibernate-mapping>

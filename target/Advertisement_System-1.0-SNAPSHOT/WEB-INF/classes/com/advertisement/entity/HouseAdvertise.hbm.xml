@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 26, 2017 12:47:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.advertisement.entity.HouseAdvertise" table="house_advertise" catalog="advertise" optimistic-lock="version">
+        <id name="houseId" type="java.lang.Integer">
+            <column name="house_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.advertisement.entity.Area" fetch="select">
+            <column name="area_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="district" class="com.advertisement.entity.District" fetch="select">
+            <column name="district_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="division" class="com.advertisement.entity.Division" fetch="select">
+            <column name="division_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.advertisement.entity.User" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="nearTo" type="string">
+            <column name="near_to" length="200" not-null="true" />
+        </property>
+        <property name="houseAddress" type="string">
+            <column name="house_address" length="300" not-null="true" />
+        </property>
+        <property name="bedNo" type="int">
+            <column name="bed_no" not-null="true" />
+        </property>
+        <property name="bathNo" type="java.lang.Integer">
+            <column name="bath_no" />
+        </property>
+        <property name="houseSize" type="java.lang.Double">
+            <column name="house_size" precision="22" scale="0" />
+        </property>
+        <property name="houseImg" type="binary">
+            <column name="house_img" />
+        </property>
+        <property name="houseRent" type="java.lang.Double">
+            <column name="house_rent" precision="22" scale="0" />
+        </property>
+        <property name="advertisementTitle" type="string">
+            <column name="advertisement_title" length="100" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="450" />
+        </property>
+        <property name="contactNo" type="string">
+            <column name="contact_no" length="45" />
+        </property>
+        <property name="postDate" type="timestamp">
+            <column name="post_date" length="19" not-null="true" />
+        </property>
+        <property name="applicableFrom" type="date">
+            <column name="applicable_from" length="10" />
+        </property>
+        <property name="status" type="char">
+            <column name="status" length="1" not-null="true" />
+        </property>
+        <set name="houseComments" table="house_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="house_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.HouseComment" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 26, 2017 12:47:22 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.advertisement.entity.Area" table="area" catalog="advertise" optimistic-lock="version">
+        <id name="areaId" type="java.lang.Integer">
+            <column name="area_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="district" class="com.advertisement.entity.District" fetch="select">
+            <column name="district_id" not-null="true" />
+        </many-to-one>
+        <property name="areaName" type="string">
+            <column name="area_name" length="300" not-null="true" />
+        </property>
+        <set name="otherAdvertises" table="other_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.OtherAdvertise" />
+        </set>
+        <set name="houseAdvertises" table="house_advertise" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area_id" not-null="true" />
+            </key>
+            <one-to-many class="com.advertisement.entity.HouseAdvertise" />
+        </set>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="area_id" />
+            </key>
+            <one-to-many class="com.advertisement.entity.User" />
+        </set>
+    </class>
+</hibernate-mapping>

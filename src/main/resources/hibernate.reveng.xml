@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="advertise"/>
+  <table-filter match-name="car_comment"/>
+  <table-filter match-name="division"/>
+  <table-filter match-name="district"/>
+  <table-filter match-name="car_advertise"/>
+  <table-filter match-name="category"/>
+  <table-filter match-name="user"/>
+  <table-filter match-name="other_comment"/>
+  <table-filter match-name="admin"/>
+  <table-filter match-name="house_advertise"/>
+  <table-filter match-name="house_comment"/>
+  <table-filter match-name="other_advertise"/>
+  <table-filter match-name="area"/>
+  <table-filter match-name="post_info"/>
+</hibernate-reverse-engineering>
